@@ -1,0 +1,9 @@
+{
+	"files.exclude": {
+		"C:/Users/Izzy/Documents/BattleTank/BattleTank/.vscode": true,
+		"C:/Users/Izzy/Documents/BattleTank/BattleTank/Content": true,
+		"C:/Users/Izzy/Documents/BattleTank/BattleTank/DerivedDataCache": true,
+		"C:/Users/Izzy/Documents/BattleTank/BattleTank/Intermediate": true,
+		"C:/Users/Izzy/Documents/BattleTank/BattleTank/Saved": true
+	}
+}
