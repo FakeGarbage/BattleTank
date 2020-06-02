@@ -16,9 +16,19 @@ class BATTLETANK_API ATankPlayerController : public APlayerController
 	GENERATED_BODY()
 
 private:
+	// Returns player pawn
 	ATank* GetControlledTank() const;
 
+	// Start moving tank barrel towards crosshair
+	void AimTowardsCrosshair();
+
+	// Get raytrace hit location
+	bool GetSightRayLocation(FVector& HitLocation) const;
+
 public:
+	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	
+
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
 };
