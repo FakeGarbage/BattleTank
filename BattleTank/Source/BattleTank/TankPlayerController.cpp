@@ -48,10 +48,7 @@ void ATankPlayerController::AimTowardsCrosshair()
 
     if (GetSightRayLocation(HitLocation)) // TODO: make this raytrace
     {
-        UE_LOG(LogTemp, Warning, TEXT("Hit Location: %s"), *HitLocation.ToString());
-        // get world location thru crosshair
-        // if it hits landscape
-            // tell controlled tankt to aim at this point
+        GetControlledTank()->AimAt(HitLocation);
     }
 }
 
