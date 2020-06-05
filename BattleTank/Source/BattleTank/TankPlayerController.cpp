@@ -3,6 +3,7 @@
 
 #include "Engine/EngineTypes.h"
 #include "Engine/World.h"
+#include "Tank.h"
 #include "TankPlayerController.h"
 
 #define OUT
@@ -25,12 +26,6 @@ void ATankPlayerController::BeginPlay()
     {
         UE_LOG(LogTemp, Warning, TEXT("No controlled tank"));
     }
-    else
-    {
-        UE_LOG(LogTemp, Warning, TEXT("%s"), *ControlledTank->GetName());
-    }
-    
-    UE_LOG(LogTemp, Warning, TEXT("PlayerController Begin Play"));
 }
 
 
