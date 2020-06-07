@@ -4,10 +4,12 @@
 #include "TankBarrel.h"
 
 
-void UTankBarrel::Elevate(float RelativeSpeed)
+void UTankBarrel::ElevateBarrel(float RelativeSpeed)
 {
-    // set the barrel's... yaw? to the crosshair's yaw
-	// we also need a max elevation
-
-	auto Time = GetWorld()->GetTimeSeconds();
+	RelativeSpeed = FMath::Clamp<float>(RelativeSpeed, -1, 1);
+	auto ElevationChange = RelativeSpeed * MaxDegreesPerSecond * GetWorld()->DeltaTimeSeconds;
+	auto RawNewElevation = GetRelativeRotation().Pitch + ElevationChange;
+	auto NewClampedElevation = FMath::Clamp<float>(RawNewElevation, MinElevationDegrees, MaxElevationDegrees);
+	
+	SetRelativeRotation(FRotator(NewClampedElevation, 0, 0));
 }

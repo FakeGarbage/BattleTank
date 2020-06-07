@@ -3,6 +3,7 @@
 
 #include "Kismet/GameplayStatics.h"
 #include "TankBarrel.h"
+#include "TankTurret.h"
 #include "TankAimingComponent.h"
 
 // Sets default values for this component's properties
@@ -21,12 +22,16 @@ void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet)
 	Barrel = BarrelToSet;
 }
 
+void UTankAimingComponent::SetTurretReference(UTankTurret* TurretToSet)
+{
+	Turret = TurretToSet;
+}
 
 void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 {
-	if (!Barrel) 
+	if (!Barrel || !Turret) 
 	{
-    	UE_LOG(LogTemp, Warning, TEXT("No Barrel set!"));
+    	UE_LOG(LogTemp, Warning, TEXT("No Barrel/Turret set!"));
 		return;
 	}
 
@@ -50,12 +55,8 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
 		auto TankName = GetOwner()->GetName();
 
-	    UE_LOG(LogTemp, Warning, TEXT("Solution Found"));
 		MoveBarrel(AimDirection);
-	}
-	else
-	{
-	    UE_LOG(LogTemp, Warning, TEXT("No Solution"));
+		MoveTurret(AimDirection);
 	}
 }
 
@@ -67,5 +68,15 @@ void UTankAimingComponent::MoveBarrel(FVector AimDirection)
 	auto AimAsRotator = AimDirection.Rotation();
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
 
-	Barrel->Elevate(5); // TODO remove magic number
+	Barrel->ElevateBarrel(DeltaRotator.Pitch);
+}
+
+void UTankAimingComponent::MoveTurret(FVector AimDirection)
+{
+	// get the unit vector for the player's crosshair location and turn that into a pitch/yaw/roll
+	auto TurretRotator = Turret->GetForwardVector().Rotation();
+	auto AimAsRotator = AimDirection.Rotation();
+	auto DeltaRotator = AimAsRotator - TurretRotator;
+
+	Turret->SpinTurret(DeltaRotator.Yaw);
 }
