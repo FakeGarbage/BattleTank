@@ -10,6 +10,4 @@ void UTankTurret::SpinTurret(float RelativeSpeed)
     auto NewRotation = GetRelativeRotation().Yaw + RotationChange;
 
 	SetRelativeRotation(FRotator(0, NewRotation, 0));
-
-	UE_LOG(LogTemp, Warning, TEXT("%s"), *GetRelativeRotation().ToString())
 }
