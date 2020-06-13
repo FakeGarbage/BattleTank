@@ -19,7 +19,8 @@ void ATankAIController::Tick(float DeltaTime)
 
     if (PlayerTank)
     {
-        // TODO move towards player
+        // move towards player
+        MoveToActor(PlayerTank, AcceptanceRadius);
 
         // Get Player pawn and aim(TODO) at their location
         Cast<ATank>(GetPawn())->AimAt(PlayerTank->GetActorLocation());

@@ -18,11 +18,14 @@ class BATTLETANK_API ATankAIController : public AAIController
 	GENERATED_BODY()
 	
 private:
-	
-public:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	// How close can AI get to player
+	float AcceptanceRadius = 3000;
+	
+public:
 };
