@@ -17,6 +17,11 @@ class BATTLETANK_API ATankPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 
+protected:
+	// Returns player pawn
+	UFUNCTION(BlueprintCallable, Category = "setup")
+	ATank* GetControlledTank() const;
+	
 private:
 
 	UPROPERTY(EditDefaultsOnly)
@@ -27,9 +32,6 @@ private:
 
 	UPROPERTY(EditDefaultsOnly)
 	float LineTraceRange = 1000000;
-
-	// Returns player pawn
-	ATank* GetControlledTank() const;
 
 	// Start moving tank barrel towards crosshair
 	void AimTowardsCrosshair();

@@ -31,6 +31,7 @@ private:
 
 
 protected:
+	UPROPERTY(BlueprintReadOnly)
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
 	UTankBarrel* Barrel = nullptr;
