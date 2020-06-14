@@ -43,7 +43,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Firing")
 	void FireTankProjectile();
 
-	// ...
+	// TODO: remove once firing is moved
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float LaunchSpeed = 4000;
 
@@ -51,6 +51,7 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float ReloadTimeInSeconds = 3;
 
+	// ...
 	UPROPERTY(EditAnywhere, Category = "Setup")
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 

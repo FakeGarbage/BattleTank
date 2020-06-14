@@ -17,15 +17,14 @@ void ATank::BeginPlay()
 {
     Super::BeginPlay();
 
-    // ...
+    TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
 }
 
 
 void ATank::AimAt(FVector HitLocation)
 {
-	if (!TankAimingComponent) { return; }
+	if (!ensure(TankAimingComponent)) { return; }
 	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
-	// UE_LOG(LogTemp, Warning, TEXT("%s aiming at %s"), *GetName(), *HitLocation.ToString());
 }
 
 
@@ -33,7 +32,7 @@ void ATank::FireTankProjectile()
 {
 	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
 
-	if (Barrel && isReloaded)
+	if (ensure(Barrel) && isReloaded)
 	{
 		// Spawn Projectile at socket location on barrel
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(
