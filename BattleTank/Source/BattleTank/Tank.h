@@ -21,6 +21,9 @@ class BATTLETANK_API ATank : public APawn
 private:
 	// Sets default values for this pawn's properties
 	ATank();
+
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
 	
 	// ...
 	double LastFireTime = 0;

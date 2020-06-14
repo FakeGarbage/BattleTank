@@ -13,6 +13,14 @@ ATank::ATank()
 }
 
 
+void ATank::BeginPlay()
+{
+    Super::BeginPlay();
+
+    // ...
+}
+
+
 void ATank::AimAt(FVector HitLocation)
 {
 	if (!TankAimingComponent) { return; }

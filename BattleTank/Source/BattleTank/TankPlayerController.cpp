@@ -4,6 +4,7 @@
 #include "Engine/EngineTypes.h"
 #include "Engine/World.h"
 #include "Tank.h"
+#include "TankAimingComponent.h"
 #include "TankPlayerController.h"
 
 #define OUT
@@ -19,13 +20,13 @@ void ATankPlayerController::Tick(float DeltaTime)
 void ATankPlayerController::BeginPlay()
 {
     Super::BeginPlay();
-
-    auto ControlledTank = GetControlledTank();
-
-    if (!ControlledTank)
+    auto AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
+    if (!AimingComponent)
     {
-        UE_LOG(LogTemp, Warning, TEXT("No controlled tank"));
+        UE_LOG(LogTemp, Warning, TEXT("No aiming component!"))
+        return;
     }
+    FoundAimingComponent(AimingComponent);
 }
 
 
