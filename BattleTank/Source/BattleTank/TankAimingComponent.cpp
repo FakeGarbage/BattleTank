@@ -4,6 +4,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "TankBarrel.h"
 #include "TankTurret.h"
+#include "Projectile.h"
 #include "TankAimingComponent.h"
 
 // Sets default values for this component's properties
@@ -23,7 +24,8 @@ void UTankAimingComponent::Initialize(UTankBarrel* BarrelToSet, UTankTurret* Tur
     Turret = TurretToSet;
 }
 
-void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
+
+void UTankAimingComponent::AimAt(FVector HitLocation)
 {
 	if (!ensure(Barrel && Turret)) { return; }
 
@@ -52,6 +54,25 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 }
 
 
+void UTankAimingComponent::FireTankProjectile()
+{
+	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
+
+	if (ensure(Barrel) && isReloaded)
+	{
+		// Spawn Projectile at socket location on barrel
+		auto Projectile = GetWorld()->SpawnActor<AProjectile>(
+			ProjectileBlueprint,
+			Barrel->GetSocketLocation(FName("Projectile")),
+			Barrel->GetSocketRotation(FName("Projectile"))
+		);
+
+		Projectile->LaunchProjectile(LaunchSpeed);
+		LastFireTime = FPlatformTime::Seconds();
+	}
+}
+
+
 void UTankAimingComponent::MoveBarrel(FVector AimDirection)
 {
 	// get the unit vector for the player's crosshair location and turn that into a pitch/yaw/roll
@@ -61,6 +82,7 @@ void UTankAimingComponent::MoveBarrel(FVector AimDirection)
 
 	Barrel->ElevateBarrel(DeltaRotator.Pitch);
 }
+
 
 void UTankAimingComponent::MoveTurret(FVector AimDirection)
 {

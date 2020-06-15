@@ -6,12 +6,6 @@
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"
 
-// Forward Declaration
-class UTankBarrel;
-class UTankTurret;
-class AProjectile;
-class UTankAimingComponent;
-
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -27,32 +21,4 @@ private:
 	
 	// ...
 	double LastFireTime = 0;
-
-
-protected:
-	UTankAimingComponent* TankAimingComponent = nullptr;
-	UTankBarrel* Barrel = nullptr;	// TODO remove
-
-
-public:	
-
-	//aim tank barrel at correct location
-	void AimAt(FVector HitLocation);
-
-	// ...
-	UFUNCTION(BlueprintCallable, Category = "Firing")
-	void FireTankProjectile();
-
-	// TODO: remove once firing is moved
-	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	float LaunchSpeed = 4000;
-
-	// ...
-	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	float ReloadTimeInSeconds = 3;
-
-	// ...
-	UPROPERTY(EditAnywhere, Category = "Setup")
-	TSubclassOf<AProjectile> ProjectileBlueprint;
-
 };
