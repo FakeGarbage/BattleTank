@@ -27,6 +27,8 @@ void UTankAimingComponent::Initialize(UTankBarrel* BarrelToSet, UTankTurret* Tur
 
 void UTankAimingComponent::BeginPlay()
 {
+	Super::BeginPlay();
+
 	// so that we fire after initial reload
 	LastFireTime = FPlatformTime::Seconds();
 }
