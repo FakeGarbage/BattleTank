@@ -33,11 +33,20 @@ protected:
 
 
 private:
+	// ...
+	double LastFireTime = 0;
+
+	// ...
+	FVector AimDirection;
+
 	// Sets default values for this component's properties
 	UTankAimingComponent();
 
 	// ...
-	double LastFireTime = 0;
+	virtual void BeginPlay();
+
+	// ...
+	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
 
 	UTankBarrel* Barrel = nullptr;
 	UTankTurret* Turret = nullptr;
@@ -68,8 +77,11 @@ public:
 	void AimAt(FVector HitLocation);
 
 	// ...
-	void MoveBarrel(FVector AimDirection);
+	void MoveBarrel(FVector TankAimDirection);
 
 	// ...
-	void MoveTurret(FVector AimDirection);
+	void MoveTurret(FVector TankAimDirection);
+
+	// ...
+	bool IsBarrelMoving();
 };
