@@ -20,7 +20,7 @@ public:
 
 	// max force per track in newtons
 	UPROPERTY(EditDefaultsOnly)
-	float TrackMaxThrottle = 400000; // Assume 40 ton tank, 1g accel
+	float TrackMaxThrottle = 40000000; // Assume 40 ton tank, 1g accel
 
 private:
 	// Initialize Tank Track
@@ -31,6 +31,6 @@ private:
 
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
 
-	// UFUNCTION()
-	// void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
 };

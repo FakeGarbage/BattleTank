@@ -16,6 +16,8 @@ void UTankMovementComponent::IntendMoveForward(float Throw)
     if (!ensure(LeftTrack && RightTrack)) { return; }
     LeftTrack->SetThrottle(Throw);
     RightTrack->SetThrottle(Throw);
+
+    UE_LOG(LogTemp, Warning, TEXT("%f"), Throw);
     // TODO prevent double speed
 }
 
