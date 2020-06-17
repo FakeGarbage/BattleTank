@@ -63,7 +63,7 @@ public:
 
 	// ...
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	float LaunchSpeed = 4000;
+	float LaunchSpeed = 20000;
 
 	// ...
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
