@@ -26,7 +26,9 @@ void ATankAIController::Tick(float DeltaTime)
         // Get Player pawn and aim(TODO) at their location
         AimingComponent->AimAt(PlayerTank->GetActorLocation());
 
-        // Fire if ready (TODO: don't fire every frame)
-        AimingComponent->FireTankProjectile();
+        if (AimingComponent->GetFiringState() == EFiringState::Locked)
+        {
+            AimingComponent->FireTankProjectile();
+        }
     }
 }

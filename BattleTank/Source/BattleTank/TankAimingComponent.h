@@ -43,6 +43,27 @@ private:
 	UTankAimingComponent();
 
 	// ...
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	float LaunchSpeed = 20000;
+
+	// ...
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	float ReloadTimeInSeconds = 3;
+
+	// ...
+	UPROPERTY(EditAnywhere, Category = "Setup")
+	TSubclassOf<AProjectile> ProjectileBlueprint;
+
+	// ...
+	void MoveBarrel(FVector TankAimDirection);
+
+	// ...
+	void MoveTurret(FVector TankAimDirection);
+
+	// ...
+	bool IsBarrelMoving();
+
+	// ...
 	virtual void BeginPlay();
 
 	// ...
@@ -62,26 +83,8 @@ public:
 	void FireTankProjectile();
 
 	// ...
-	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	float LaunchSpeed = 20000;
-
-	// ...
-	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	float ReloadTimeInSeconds = 3;
-
-	// ...
-	UPROPERTY(EditAnywhere, Category = "Setup")
-	TSubclassOf<AProjectile> ProjectileBlueprint;
-
-	// ...
 	void AimAt(FVector HitLocation);
 
 	// ...
-	void MoveBarrel(FVector TankAimDirection);
-
-	// ...
-	void MoveTurret(FVector TankAimDirection);
-
-	// ...
-	bool IsBarrelMoving();
+	EFiringState GetFiringState() const;
 };
