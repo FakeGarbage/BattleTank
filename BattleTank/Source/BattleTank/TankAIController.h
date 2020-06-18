@@ -23,9 +23,11 @@ private:
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
-	// How close can AI get to player
-	float AcceptanceRadius = 3000;
 	
+protected:
+	// ...
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	float AcceptanceRadius = 6000;
+
 public:
 };
