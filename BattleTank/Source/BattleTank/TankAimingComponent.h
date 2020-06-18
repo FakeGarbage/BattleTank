@@ -12,7 +12,8 @@ enum class EFiringState : uint8
 {
 	Locked,
 	Aiming,
-	Reloading
+	Reloading,
+	NoAmmo
 };
 
 // forward declaration
@@ -73,7 +74,11 @@ private:
 	UTankTurret* Turret = nullptr;
 
 
-public:	
+public:
+	// ...
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	int AmmoCount = 5;
+
 	// ...
 	UFUNCTION(BluePrintCallable, Category = "Input")
 	void Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
@@ -84,6 +89,10 @@ public:
 
 	// ...
 	void AimAt(FVector HitLocation);
+
+	// ...
+	UFUNCTION(BlueprintCallable, Category = "Firing")
+	int AmmoRemaining() const;
 
 	// ...
 	EFiringState GetFiringState() const;
