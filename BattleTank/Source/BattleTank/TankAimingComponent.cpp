@@ -146,7 +146,7 @@ bool UTankAimingComponent::IsBarrelMoving()
 }
 
 
-int UTankAimingComponent::AmmoRemaining() const
+int32 UTankAimingComponent::AmmoRemaining() const
 {
 	return AmmoCount;
 }

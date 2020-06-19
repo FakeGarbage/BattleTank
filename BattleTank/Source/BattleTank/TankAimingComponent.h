@@ -77,7 +77,7 @@ private:
 public:
 	// ...
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	int AmmoCount = 5;
+	int32 AmmoCount = 5;
 
 	// ...
 	UFUNCTION(BluePrintCallable, Category = "Input")
@@ -88,11 +88,11 @@ public:
 	void FireTankProjectile();
 
 	// ...
-	void AimAt(FVector HitLocation);
+	UFUNCTION(BlueprintCallable, Category = "Firing")
+	int32 AmmoRemaining() const;
 
 	// ...
-	UFUNCTION(BlueprintCallable, Category = "Firing")
-	int AmmoRemaining() const;
+	void AimAt(FVector HitLocation);
 
 	// ...
 	EFiringState GetFiringState() const;
