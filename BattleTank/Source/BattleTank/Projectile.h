@@ -21,6 +21,9 @@ public:
 	AProjectile();
 
 private:
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
+
 	// ...
 	UProjectileMovementComponent* ProjectileMovement = nullptr;
 
@@ -30,16 +33,17 @@ private:
 
 	// ...
 	UPROPERTY(VisibleAnywhere, Category = "Setup")
-	UParticleSystemComponent* ProjectileParticles = nullptr;
+	UParticleSystemComponent* LaunchParticle = nullptr;
+
+	// ...
+	UPROPERTY(VisibleAnywhere, Category = "Setup")
+	UParticleSystemComponent* ImpactParticle = nullptr;
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
 	// ...
 	void LaunchProjectile(float Speed);
 
