@@ -1,10 +1,12 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
+#include "Components/StaticMeshComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Particles/ParticleSystemComponent.h"
-#include "Components/StaticMeshComponent.h"
+#include "PhysicsEngine/RadialForceComponent.h"
 #include "Projectile.h"
+
 
 // Sets default values
 AProjectile::AProjectile()
@@ -26,6 +28,11 @@ AProjectile::AProjectile()
 	ImpactParticle = CreateDefaultSubobject<UParticleSystemComponent>(FName("Impact Particle"));
 	ImpactParticle->bAutoActivate = false;
 	ImpactParticle->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+
+	ImpactForce = CreateDefaultSubobject<URadialForceComponent>(FName("Impact Force"));
+	ImpactForce->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+	// ImpactForce->bAutoActivate = false;
+
 }
 
 
@@ -50,4 +57,16 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, U
 {
 	LaunchParticle->Deactivate();
 	ImpactParticle->Activate();
+	ImpactForce->FireImpulse();
+
+	SetRootComponent(ImpactParticle);
+	CollisionMesh->DestroyComponent();
+
+	FTimerHandle Timer;
+	GetWorld()->GetTimerManager().SetTimer(Timer, this, &AProjectile::OnTimerExpire, DestroyDelay, false);
+}
+
+void AProjectile::OnTimerExpire()
+{
+	Destroy();
 }

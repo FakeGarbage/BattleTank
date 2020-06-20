@@ -49,7 +49,7 @@ private:
 
 	// ...
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	float ReloadTimeInSeconds = 3;
+	float ReloadTimeInSeconds = 2;
 
 	// ...
 	UPROPERTY(EditAnywhere, Category = "Setup")
@@ -77,7 +77,7 @@ private:
 public:
 	// ...
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	int32 AmmoCount = 5;
+	int32 AmmoCount = 20;
 
 	// ...
 	UFUNCTION(BluePrintCallable, Category = "Input")
