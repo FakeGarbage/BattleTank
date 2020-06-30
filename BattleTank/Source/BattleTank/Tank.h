@@ -27,9 +27,12 @@ public:
 
 private:
 	// ...
+	virtual void BeginPlay() override;
+	
+	// ...
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	int32 TotalHealth = 100;
 
 	// ...
-	int32 CurrentHealth = TotalHealth;
+	int32 CurrentHealth;
 };

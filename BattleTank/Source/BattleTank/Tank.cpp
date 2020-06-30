@@ -11,6 +11,13 @@ ATank::ATank()
 }
 
 
+void ATank::BeginPlay()
+{
+	Super::BeginPlay();
+	CurrentHealth = TotalHealth;
+}
+
+
 float ATank::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser)
 {
 	int32 DamagePoints = FPlatformMath::RoundToInt(DamageAmount);

@@ -22,7 +22,6 @@ protected:
 	void FoundAimingComponent(UTankAimingComponent* AimCompRef);
 
 private:
-
 	UPROPERTY(EditDefaultsOnly)
 	float CrosshairXLocation = 0.5f;
 
@@ -32,8 +31,14 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 	float LineTraceRange = 1000000;
 
+	UFUNCTION()
+	void OnPossessedTankDeath();
+
 	// Start moving tank barrel towards crosshair
 	void AimTowardsCrosshair();
+
+	// ...
+	virtual void SetPawn(APawn* InPawn) override;
 
 	// Get raytrace hit location
 	bool GetSightRayLocation(FVector& HitLocation) const;
